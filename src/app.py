@@ -21,7 +21,7 @@ def display_beverages():
     """Display available beverages at the moment"""
     try:
         available_beverages = VENDINGMACHINE.get_available_beverages()
-        return jsonify({'beverages': available_beverages})
+        return jsonify(available_beverages)
     except Exception as err:
         error_response = jsonify({'status': 'UNKNOWN_ERROR', 'message': err.args})
         return abort(make_response(error_response, 500))

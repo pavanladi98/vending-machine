@@ -1,5 +1,7 @@
 from .models.ingredients import Ingredients
 from .exceptions import InsufficientIngredientsException, IngredientsOverflowException
+from eventbus import Topic
+from pubsub import pub
 
 
 class Inventory:
@@ -43,6 +45,7 @@ class Inventory:
             raise ValueError('No ingredients provided to remove from inventory')
         if any([ingredients.coffee > self._coffee, ingredients.sugar > self._sugar, ingredients.milk > self._milk,
                 ingredients.water > self._water]):
+            pub.sendMessage(Topic.INSUFFICIENT_INGREDIENTS, ingredients=self.display())
             raise InsufficientIngredientsException
         self._coffee -= ingredients.coffee
         self._milk -= ingredients.milk

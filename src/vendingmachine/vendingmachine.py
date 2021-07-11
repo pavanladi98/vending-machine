@@ -31,7 +31,13 @@ class CoffeeVendingMachine:
     def get_available_beverages(self) -> list:
         ingredients = self.inventory.display()
         available_beverages = []
+        available_sugarless_beverages = []
         for beverage in Beverages:
             if self._verify_beverage(ingredients, beverage):
                 available_beverages.append(beverage.name)
-        return available_beverages
+                available_sugarless_beverages.append(beverage.name)
+                continue
+            sugarless_beverage = Beverages.sugarless(beverage)
+            if self._verify_beverage(ingredients, sugarless_beverage):
+                available_sugarless_beverages.append(sugarless_beverage.name)
+        return {'sugar': available_beverages, 'sugarless': available_sugarless_beverages}
