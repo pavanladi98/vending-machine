@@ -6,15 +6,11 @@ def adapt_beverage(beverage_str: str, sugarless: bool = False) -> Coffee:
         return
     for beverage in Beverages:
         if beverage.name == beverage_str:
-            x = Beverages.sugarless(beverage) if sugarless else beverage
-            return x
+            return Beverages.sugarless(beverage) if sugarless else beverage
     raise NotImplementedError('Beverage `%s` is not available' % beverage_str)
 
 
 def adapt_ingredients(request):
-    ingredients = Ingredients()
-    ingredients.milk = request.get('milk') or 0
-    ingredients.water = request.get('water') or 0
-    ingredients.sugar = request.get('sugar') or 0
-    ingredients.coffee = request.get('coffee') or 0
-    return ingredients
+    if not request or not isinstance(request, dict):
+        return
+    return Ingredients.from_dict(request)

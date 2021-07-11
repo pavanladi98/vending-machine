@@ -14,8 +14,7 @@
 
 
 ## Assumptions:
-1. Server will never restarts. So, inventory is persistent
-2. Can topup multiple values at a time
+1. Multiple ingredients can be toppedup at a time.
 
 
 ## ToDos:

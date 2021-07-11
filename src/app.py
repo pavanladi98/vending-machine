@@ -58,7 +58,7 @@ def topup_inventory():
     request_json = request.json
     try:
         ingredients = adapt_ingredients(request_json)
-        if ingredients.isempty():
+        if not ingredients or ingredients.isempty():
             response = jsonify({'status': 'INVALID_REQUEST',
                                'message': 'Provide atleast one of the ingredients - coffee, sugar, milk, water'})
             return abort(make_response(response, 400))
