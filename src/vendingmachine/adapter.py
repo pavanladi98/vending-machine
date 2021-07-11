@@ -1,15 +1,13 @@
-from vendingmachine.models import Coffee, BlackCoffee, MilkCoffee, BlackCoffeeSugarless,\
-    MilkCoffeeSugarless, Ingredients
+from vendingmachine.models import Coffee, Beverages, Ingredients
 
 
 def adapt_beverage(beverage_str: str, sugarless: bool = False) -> Coffee:
-    if not beverage_str:
+    if not beverage_str or not isinstance(beverage_str, str):
         return
-    beverage_str = beverage_str.lower()
-    if beverage_str == 'blackcoffee':
-        return BlackCoffeeSugarless if sugarless else BlackCoffee
-    if beverage_str == 'milkcoffee':
-        return MilkCoffeeSugarless if sugarless else MilkCoffee
+    for beverage in Beverages:
+        if beverage.name == beverage_str:
+            x = Beverages.sugarless(beverage) if sugarless else beverage
+            return x
     raise NotImplementedError('Beverage `%s` is not available' % beverage_str)
 
 

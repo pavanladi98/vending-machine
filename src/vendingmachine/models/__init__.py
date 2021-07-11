@@ -1,5 +1,4 @@
 from .ingredients import Ingredients
-from .coffee import Coffee, BlackCoffee, MilkCoffee, \
-    BlackCoffeeSugarless, MilkCoffeeSugarless
+from .coffee import Coffee, Beverages
 
-__all__ = ['Ingredients', 'Coffee', 'BlackCoffee', 'MilkCoffee', 'BlackCoffeeSugarless', 'MilkCoffeeSugarless']
+__all__ = ['Ingredients', 'Coffee', 'Beverages']

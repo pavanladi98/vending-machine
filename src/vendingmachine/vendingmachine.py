@@ -1,19 +1,5 @@
-from vendingmachine.models import coffee
-from .models import Ingredients, Coffee, BlackCoffee, MilkCoffee, \
-    BlackCoffeeSugarless, MilkCoffeeSugarless
+from .models import Ingredients, Coffee, Beverages
 from .inventory import Inventory
-from enum import Enum
-
-
-supported_beverages = [BlackCoffee, MilkCoffee, BlackCoffeeSugarless, MilkCoffeeSugarless]
-
-
-class Beverages(Enum):
-    """Beverages supported"""
-    BlackCoffee = 'blackcoffee'
-    MilkCoffee = 'milkcoffee'
-    BlackCoffeeSugarless = 'blackcoffeesugarless'
-    MilkCoffeeSugarless = 'milkcoffeesugarless'
 
 
 class CoffeeVendingMachine:
@@ -33,8 +19,7 @@ class CoffeeVendingMachine:
         self.inventory.remove(ingredients)
 
     def dispense_beverage(self, beverage: Coffee) -> None:
-        ingredients = Ingredients(coffee=beverage.coffee, milk=beverage.milk,
-                                  sugar=beverage.sugar, water=beverage.water)
+        ingredients = Ingredients.get_ingredients_from_beverage(beverage)
         self._remove_ingredients(ingredients)
 
     def _verify_beverage(self, ingredients: Ingredients, beverage: Coffee) -> bool:
@@ -46,7 +31,7 @@ class CoffeeVendingMachine:
     def get_available_beverages(self) -> list:
         ingredients = self.inventory.display()
         available_beverages = []
-        for beverage in supported_beverages:
+        for beverage in Beverages:
             if self._verify_beverage(ingredients, beverage):
-                available_beverages.append(beverage.__name__)
+                available_beverages.append(beverage.name)
         return available_beverages

@@ -1,26 +1,19 @@
+from enum import Enum
+
+
 class Coffee:
-    sugar = 0
-    coffee = 0
-    water = 0
-    milk = 0
+    def __init__(self, sugar, coffee, water, milk) -> None:
+        self.sugar = sugar
+        self.coffee = coffee
+        self.water = water
+        self.milk = milk
 
 
-class BlackCoffee(Coffee):
-    sugar = 1
-    coffee = 1
-    water = 3
+class Beverages(Coffee, Enum):
+    """Beverages supported"""
+    BlackCoffee = 1, 1, 3, 0
+    MilkCoffee = 1, 1, 1, 2
 
-
-class MilkCoffee(Coffee):
-    sugar = 1
-    coffee = 1
-    water = 1
-    milk = 2
-
-
-class BlackCoffeeSugarless(BlackCoffee):
-    sugar = 0
-
-
-class MilkCoffeeSugarless(MilkCoffee):
-    sugar = 0
+    def sugarless(beverage: Coffee):
+        beverage.sugar = 0
+        return beverage

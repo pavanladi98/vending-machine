@@ -6,6 +6,7 @@ from werkzeug.exceptions import HTTPException
 
 app = Flask(__name__)
 INVENTORY = Inventory(water_capacity=30, sugar_capacity=20, milk_capacity=30, coffee_capacity=30)
+VENDINGMACHINE = CoffeeVendingMachine(inventory=INVENTORY)
 
 
 @app.route('/isalive', methods=['GET'])
@@ -19,8 +20,7 @@ def isalive():
 def display_beverages():
     """Display available beverages at the moment"""
     try:
-        vendingmachine = CoffeeVendingMachine(inventory=INVENTORY)
-        available_beverages = vendingmachine.get_available_beverages()
+        available_beverages = VENDINGMACHINE.get_available_beverages()
         return jsonify({'beverages': available_beverages})
     except Exception as err:
         error_response = jsonify({'status': 'UNKNOWN_ERROR', 'message': err.args})
@@ -37,8 +37,7 @@ def dispense_beverage():
             response = jsonify({'status': 'INVALID_REQUEST',
                                 'message': 'Provide a beverage - blackcoffee, milkcoffee'})
             return abort(make_response(response, 400))
-        vendingmachine = CoffeeVendingMachine(inventory=INVENTORY)
-        vendingmachine.dispense_beverage(beverage)
+        VENDINGMACHINE.dispense_beverage(beverage)
         return jsonify({'status': 'SUCCESS', 'message': 'Beverage dispensed'})
     except HTTPException:
         raise
@@ -63,8 +62,7 @@ def topup_inventory():
             response = jsonify({'status': 'INVALID_REQUEST',
                                'message': 'Provide atleast one of the ingredients - coffee, sugar, milk, water'})
             return abort(make_response(response, 400))
-        vendingmachine = CoffeeVendingMachine(inventory=INVENTORY)
-        vendingmachine.add_ingredients(ingredients)
+        VENDINGMACHINE.add_ingredients(ingredients)
         return jsonify({'status': 'SUCCESS'})
     except HTTPException:
         raise
