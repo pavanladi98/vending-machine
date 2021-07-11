@@ -2,7 +2,7 @@ from enum import Enum
 
 
 class Coffee:
-    def __init__(self, coffee, water, milk, sugar) -> None:
+    def __init__(self, coffee: int, water: int, milk: int, sugar: int) -> None:
         self.coffee = coffee
         self.water = water
         self.milk = milk

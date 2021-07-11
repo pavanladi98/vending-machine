@@ -5,5 +5,5 @@ class Topic:
 
 def subscribe_listeners():
     """subscribe listeners here"""
-    # pub.subscribe(subscriber1, Topic.INSUFFICIENT_INGREDIENTS)
+    # pub.subscribe(listener1, Topic.INSUFFICIENT_INGREDIENTS)
     pass

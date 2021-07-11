@@ -10,7 +10,7 @@ def adapt_beverage(beverage_str: str, sugarless: bool = False) -> Coffee:
     raise NotImplementedError('Beverage `%s` is not available' % beverage_str)
 
 
-def adapt_ingredients(request):
+def adapt_ingredients(request: dict) -> Ingredients:
     if not request or not isinstance(request, dict):
         return
     return Ingredients.from_dict(request)

@@ -8,7 +8,7 @@ class Ingredients:
         self.sugar = sugar
         self.water = water
 
-    def isempty(self):
+    def isempty(self) -> bool:
         return not any([self.coffee, self.milk, self.sugar, self.water])
 
     @staticmethod

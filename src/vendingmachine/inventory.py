@@ -5,7 +5,8 @@ from pubsub import pub
 
 
 class Inventory:
-    def __init__(self, water_capacity=0, coffee_capacity=0, milk_capacity=0, sugar_capacity=0) -> None:
+    def __init__(self, water_capacity: int = 0, coffee_capacity: int = 0, milk_capacity: int = 0,
+                 sugar_capacity: int = 0) -> None:
         self._coffee = 0
         self._milk = 0
         self._sugar = 0
