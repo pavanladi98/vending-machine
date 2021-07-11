@@ -22,17 +22,13 @@ class Inventory:
         if ingredients.isempty():
             raise ValueError('No ingredients provided to add into inventory')
         max_coffee = self._coffee_capacity - self._coffee
-        if ingredients.coffee > max_coffee:
-            raise IngredientsOverflowException('Max coffee can be added is %s' % max_coffee)
         max_water = self._water_capacity - self._water
-        if ingredients.water > max_water:
-            raise IngredientsOverflowException('Max water can be added is %s' % max_water)
         max_sugar = self._sugar_capacity - self._sugar
-        if ingredients.sugar > max_sugar:
-            raise IngredientsOverflowException('Max sugar can be added is %s' % max_sugar)
         max_milk = self._milk_capacity - self._milk
-        if ingredients.milk > max_milk:
-            raise IngredientsOverflowException('Max milk can be added is %s' % max_milk)
+        if any([ingredients.coffee > max_coffee, ingredients.water > max_water, ingredients.sugar > max_sugar,
+                ingredients.milk > max_milk]):
+            raise IngredientsOverflowException('Max capacity available is coffee:{0}, milk:{1}, sugar:{2}, water:{3}'.format(
+                max_coffee, max_milk, max_sugar, max_water))
 
         self._coffee += ingredients.coffee
         self._milk += ingredients.milk
