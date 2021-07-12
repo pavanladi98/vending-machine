@@ -26,7 +26,7 @@
 ## API Signature:
 1. `GET /api/beverages`
 
-2. `GET /api/dispense?beverage=BlackCoffee&sugarless`
+2. `GET /api/dispense?beverage=BlackCoffee&sugarless=true`
 
 3. `POST /api/inventory/topup`
     ```
